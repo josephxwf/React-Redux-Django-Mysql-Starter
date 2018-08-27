@@ -1,0 +1,13 @@
+.section1 {
+  height: 100vh;
+  background: linear-gradient(rgb(61, 153, 112, 1), rgb(61, 153, 112, 0.2));
+}
+
+.col-11 {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-group .btn {
+  margin-bottom: 5px;
+}

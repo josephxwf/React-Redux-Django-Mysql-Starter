@@ -1,0 +1,146 @@
+###clecn local server port cache####
+sudo lsof -t -i tcp:8000 | xargs kill -9
+
+
+mysql.server start
+which mysql
+mysql -u root -p
+password: “password”
+
+
+mysql> CREATE DATABASE linchpin_test;
+mysql> SET PASSWORD FOR 'root'@'localhost' = PASSWORD('password');
+mysql> USE linchpin_test;
+mysql> exit;
+
+In the root directory:
+mysql -u root -p linchpin_test < Linchpin_Coach.sql
+Enter password: password
+
+if you change the database or data, you should run:
+python3 manage.py makemigrations insurance
+python3 manage.py migrate
+
+
+### create virtual environment and activate it:
+virtualenv env
+source env/bin/activate
+
+###get all dependencies from virtualenv:
+pip3 freeze > requirements.txt
+
+###install dependencies from requirements.txt 
+pip3 install -r requirements.txt
+
+###run django server
+python3 manage.py runserver
+
+
+chmod 400 linchpin.pem
+ssh -i "linchpin.pem" ubuntu@ec2-18-210-61-158.compute-1.amazonaws.com
+
+
+mysql -h linchpinv1.cpav4aeizieo.us-east-1.rds.amazonaws.com -P 3306 -u linchpinroot -p
+
+cat settings.py
+
+
+
+
+
+
+ubuntu@ip-172-31-28-112:~/test/linchpin$ source env/bin/activate
+(env) ubuntu@ip-172-31-28-112:~/test/linchpin$ pyhton3 manage.py makemigration
+No command 'pyhton3' found, did you mean:
+ Command 'python3' from package 'python3-minimal' (main)
+pyhton3: command not found
+(env) ubuntu@ip-172-31-28-112:~/test/linchpin$ python3 manage.py makemigration
+Unknown command: 'makemigration'. Did you mean makemigrations?
+Type 'manage.py help' for usage.
+(env) ubuntu@ip-172-31-28-112:~/test/linchpin$ python3 manage.py makemigrations
+Migrations for 'insurance':
+  insurance/migrations/0002_auto_20180821_1606.py
+    - Alter field calculated_premium on naic_user_data
+(env) ubuntu@ip-172-31-28-112:~/test/linchpin$ python3 manage.py migrate
+System check identified some issues:
+
+WARNINGS:
+?: (mysql.W002) MySQL Strict Mode is not set for database connection 'default'
+	HINT: MySQL's Strict Mode fixes many data integrity problems in MySQL, such as data truncation upon insertion, by escalating warnings into errors. It is strongly recommended you activate it. See: https://docs.djangoproject.com/en/2.1/ref/databases/#mysql-sql-mode
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, insurance, sessions
+Running migrations:
+  Applying insurance.0002_auto_20180821_1606... OK
+(env) ubuntu@ip-172-31-28-112:~/test/linchpin$ sudo ufw allow 8000
+Rules updated
+Rules updated (v6)
+(env) ubuntu@ip-172-31-28-112:~/test/linchpin$ python3 manage.py runserver 0.0.0.0:8000
+Performing system checks...
+
+System check identified no issues (0 silenced).
+August 21, 2018 - 16:10:52
+Django version 2.1, using settings 'linchpin.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+packet_write_wait: Connection to 18.210.61.158 port 22: Broken pipe
+Josephs-MacBook-Pro:linchpinRemote 2 josephfan$ 
+Josephs-MacBook-Pro:linchpinRemote 2 josephfan$ 
+Josephs-MacBook-Pro:linchpinRemote 2 josephfan$ ssh -i "linchpin.pem" ubuntu@ec2-18-210-61-158.compute-1.amazonaws.com
+Welcome to Ubuntu 16.04.4 LTS (GNU/Linux 4.4.0-1065-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  Get cloud support with Ubuntu Advantage Cloud Guest:
+    http://www.ubuntu.com/business/services/cloud
+
+40 packages can be updated.
+0 updates are security updates.
+
+New release '18.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Tue Aug 21 15:55:22 2018 from 172.56.34.33
+ubuntu@ip-172-31-28-112:~$ 
+ubuntu@ip-172-31-28-112:~$ 
+ubuntu@ip-172-31-28-112:~$ sudo ufw allow 8000
+Skipping adding existing rule
+Skipping adding existing rule (v6)
+ubuntu@ip-172-31-28-112:~$ 
+ubuntu@ip-172-31-28-112:~$ 
+ubuntu@ip-172-31-28-112:~$ python3 manage.py runserver
+python3: can't open file 'manage.py': [Errno 2] No such file or directory
+ubuntu@ip-172-31-28-112:~$ ls
+freelance_stuff  test
+ubuntu@ip-172-31-28-112:~$ cd test
+ubuntu@ip-172-31-28-112:~/test$ cd linchpin
+ubuntu@ip-172-31-28-112:~/test/linchpin$ python3 manage.py runserver
+Performing system checks...
+
+System check identified no issues (0 silenced).
+August 21, 2018 - 16:41:12
+Django version 2.1, using settings 'linchpin.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+
+
+# to configure setting on ec2 to make  api work
+https://www.youtube.com/watch?v=Xlp9G137-MI
+
+sudo vim /etc/systemd/system/gunicorn.service
+sudo systemctl start gunicorn
+sudo systemctl enable gunicorn
+sudo systemctl status gunicorn
+sudo journalctl -u gunicorn 
+
+
+
+sudo vim etc/nginx/sites-available/linchpin
+sudo ln -s etc/nginx/sites-available/linchpin /etc/nginx/sites-enabled
+sudo systemctl restart nginx
+
+sudo ufw delete allow 8000
+
+

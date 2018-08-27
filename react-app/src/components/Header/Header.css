@@ -1,0 +1,14 @@
+.navbar,
+.navbar-default {
+  background-image: linear-gradient(
+    to bottom right,
+    #eee,
+    #eee
+  ) !important; /* override background image gradient w/ flat color */
+}
+
+.navbar-brand {
+  transform: translateX(-50%);
+  left: 50%;
+  position: absolute;
+}

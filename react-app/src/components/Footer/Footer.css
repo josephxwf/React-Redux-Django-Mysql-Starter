@@ -1,0 +1,11 @@
+footer {
+  background-color: #eee;
+  padding: 25px;
+}
+ul,
+li {
+  list-style-type: none;
+}
+.list {
+  margin-top: 15px;
+}
