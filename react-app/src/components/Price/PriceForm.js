@@ -5,11 +5,11 @@ import { getProductDetail } from "../../actions";
 
 import "../Forms/form.css";
 
-class PriceFormForAllPolicies extends Component {
+class PriceForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { policy: "General Liability" };
+    this.state = { product: "GZ" };
   }
 
   componentWillMount() {
@@ -38,4 +38,4 @@ function mapStateToProps({ productDetail }) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PriceFormForAllPolicies);
+)(PriceForm);
