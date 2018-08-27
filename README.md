@@ -132,3 +132,83 @@ export default combineReducers({
 npm run build
 ```
 Copy dist folder to s3
+
+
+# Back-end Setup
+---------------
+
+  # 1. Set up virtualenv
+  ```bash
+  $ pip3 install virtualenv
+  ```
+
+  # 2. Make sure MySQL is installed
+  check if database exists and you can connect to it
+  ```bash
+  mysql -u root -p mydatabase
+  ```
+
+  # 3. Make sure correct version of django is installed and other pip packages
+  connecting to database requires a specific drive to connect to the mysql database  
+  make sure you can connect with the settings in : 
+  > ###### /linchpin/settings.py
+
+  ```python
+  DATABASES = {
+      'default': {        
+          'NAME': 'mydatabase',        
+          'ENGINE': 'django.db.backends.mysql',
+          'USER': 'root',
+          'PASSWORD': 'password',
+          'HOST': 'localhost',
+          'PORT': ''
+      }
+  }
+  ```
+  ```bash
+  (py1) Swapnils-MBP:linchpin iamwetalldid$ pip3 freeze
+  Django==2.0.7
+  django-cors-headers==2.3.0
+  mysql-connector-python==8.0.11
+  mysqlclient==1.3.13
+  protobuf==3.6.0
+  pytz==2018.5
+  six==1.11.0
+  (py1) Swapnils-MBP:linchpin iamwetalldid$ 
+  ```
+
+  # 4. Setup django app (insurance) and then create models inside it
+
+  > ###### /linchpin/insurance/models.py
+
+  ```python
+  class NAIC_Sub_Industry_Code_11(models.Model):
+    class_code = models.IntegerField(blank=False)
+    class_sub_code = models.IntegerField(blank=False, db_index=True)
+    industry = models.CharField(max_length=200)
+    class Meta:
+      db_table = "11_NAIC_SUB_INDUSTRY_CODE"
+  ```
+
+  # 5. Setup routes
+
+  > ###### /linchpin/linchpin/urls.py
+  > ###### /linchpin/insurance/urls.py
+
+  # 6. Run migrations to update for any changes in models
+  ```bash
+  python3 manage.py makemigrations insurance
+  python3 manage.py migrate
+  ```
+
+  # 7. Import data from sql dump
+  ```bash
+  mysql -u root -p mydatabase < mydatbase.sql
+  ```
+
+  # 8. Start server and test endpoints
+  ```bash
+  python3 manage.py runserver
+  ```
+
+
