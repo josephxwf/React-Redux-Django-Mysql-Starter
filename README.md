@@ -151,7 +151,7 @@ Copy dist folder to s3
   # 3. Make sure correct version of django is installed and other pip packages
   connecting to database requires a specific drive to connect to the mysql database  
   make sure you can connect with the settings in : 
-  > ###### /linchpin/settings.py
+  > ###### /djangobackend/settings.py
 
   ```python
   DATABASES = {
@@ -179,21 +179,16 @@ Copy dist folder to s3
 
   # 4. Setup django app (insurance) and then create models inside it
 
-  > ###### /linchpin/insurance/models.py
+  > ###### /djangobackend/app/models.py
 
   ```python
-  class NAIC_Sub_Industry_Code_11(models.Model):
-    class_code = models.IntegerField(blank=False)
-    class_sub_code = models.IntegerField(blank=False, db_index=True)
-    industry = models.CharField(max_length=200)
-    class Meta:
-      db_table = "11_NAIC_SUB_INDUSTRY_CODE"
+  
   ```
 
   # 5. Setup routes
 
-  > ###### /linchpin/linchpin/urls.py
-  > ###### /linchpin/insurance/urls.py
+  > ###### /djangobackend/app/urls.py
+
 
   # 6. Run migrations to update for any changes in models
   ```bash
